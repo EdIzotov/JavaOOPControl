@@ -1,0 +1,9 @@
+# Java and related ecosystem
+# ==========================
+.settings/
+.vscode/
+.git/
+bin/
+target/
+.classpath
+.project
