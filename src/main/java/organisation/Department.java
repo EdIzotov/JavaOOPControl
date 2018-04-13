@@ -1,5 +1,7 @@
 package organisation;
 
+import java.util.Arrays;
+
 public class Department implements InterfaceDepartment {
     
     private String departmentName;
@@ -13,12 +15,43 @@ public class Department implements InterfaceDepartment {
         this.departmentName = departmentName;
         this.departmentEmployees = departmentEmployees;
     }
-
     public String getDepartmentName() {
         return departmentName;
     }
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+    public void hireDepartmentEmployee(Employee newEmployee) {
+        Employee[] tempDepartmentEmployees = new Employee[departmentEmployees.length + 1];
+        for (int i = 0; i < departmentEmployees.length; i++) {
+            tempDepartmentEmployees[i] = departmentEmployees[i];
+        }
+        tempDepartmentEmployees[tempDepartmentEmployees.length - 1] = newEmployee;
+        departmentEmployees = tempDepartmentEmployees;
+    }
+    public void fireDepartmentEmployee(String lastName, String firstName, String position) {
+        Employee[] tempDepartmentEmployees;
+        try {
+            tempDepartmentEmployees = new Employee[departmentEmployees.length - 1];
+        } catch (NegativeArraySizeException e) {
+            tempDepartmentEmployees = new Employee[departmentEmployees.length];
+        }
+        for (int i = 0; i < departmentEmployees.length; i++) {
+            if (departmentEmployees[i].getEmployeeLastName().equals(lastName) &&
+            departmentEmployees[i].getEmployeeFirstName().equals(firstName) && 
+            departmentEmployees[i].getEmployeePosition().equals(position)) {
+                departmentEmployees[i] = null;
+                break;
+            }
+        }
+        int iteratee = 0;
+        for (int i = 0; i < departmentEmployees.length; i++) {
+            if (departmentEmployees[i] != null) {
+                tempDepartmentEmployees[iteratee] = departmentEmployees[i];
+                iteratee++;
+            }
+        }
+        departmentEmployees = tempDepartmentEmployees;
     }
     public int getDepartmentEmployeesQty() {
         return departmentEmployees.length;
@@ -28,7 +61,11 @@ public class Department implements InterfaceDepartment {
         for (Employee employee: departmentEmployees) {
             salary += employee.getEmployeeSalary();
         }
-        return salary;
+        try {
+            return salary / departmentEmployees.length;
+        } catch (ArithmeticException e) {
+            return 0;
+        }
     }
     public Employee getDepartmentEmployeeByName(String firstName, String lastName) {
         for (Employee employee: departmentEmployees) {
@@ -38,26 +75,17 @@ public class Department implements InterfaceDepartment {
         }
         return null;
     }
-    public void fireDepartmentEmployee(String firstName, String lastName, String position) {
-        for (int i = 0; i < departmentEmployees.length; i++) {
-            if ((departmentEmployees[i].getEmployeeLastName().equals(lastName)) && (departmentEmployees[i].getEmployeeFirstName().equals(firstName)) && (departmentEmployees[i].getEmployeePosition().equals(position))) {
-                departmentEmployees[i] = null;
-                Employee[] tempDepartmentEmployees = new Employee[departmentEmployees.length - 1];
-                for (int j = 0; j < departmentEmployees.length; j++) {
-                    if (departmentEmployees[j] != null) {
-
-                    }
-                }                
-            }
-        }
-    }
-    public void hireDepartmentEmployee(Employee newEmployee) {
-        Employee[] tempDepartmentEmployees = new Employee[departmentEmployees.length + 1];
-    }
     public Employee[] getAllDepartmentEmployees() {
         return departmentEmployees;
     }
-    public Employee[] getAllDepartmentEmployeesSorted() {
-        return departmentEmployees;
+    public Employee[] getAllDepartmentEmployeesSortedBySalary() {
+        Employee[] tempDepartmentEmployees = departmentEmployees.clone();
+        Arrays.sort(tempDepartmentEmployees);
+        return tempDepartmentEmployees;
+    }
+    public Employee[] getAllDepartmentEmployeesSortedByName() {
+        Employee[] tempDepartmentEmployees = departmentEmployees.clone();
+      //  Arrays.sort(tempDepartmentEmployees);
+        return tempDepartmentEmployees;
     }
 }

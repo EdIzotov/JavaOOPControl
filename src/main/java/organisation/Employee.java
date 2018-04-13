@@ -1,6 +1,8 @@
 package organisation;
 
-public class Employee implements InterfaceEmployee {
+import java.util.Comparator;
+
+public class Employee implements InterfaceEmployee, Comparable<Employee> {
 
     private String firstName;
     private String lastName;
@@ -44,4 +46,15 @@ public class Employee implements InterfaceEmployee {
     public void setEmployeeSalary(int salary) {
         this.salary = salary;
     }
+    public int compareTo(Employee compareEmployee) {
+        int compareSalary = compareEmployee.getEmployeeSalary();
+        return this.salary - compareSalary;
+    }
+    public static Comparator<Employee> nameComparator = new Comparator<Employee>() {
+        public int compare(Employee emp1, Employee emp2) {
+            String empLastName1 = emp1.getEmployeeLastName();
+            String empLastName2 = emp2.getEmployeeLastName();
+            return empLastName1.compareTo(empLastName2);
+        }
+    };
 }

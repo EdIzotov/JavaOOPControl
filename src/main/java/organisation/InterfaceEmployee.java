@@ -1,8 +1,8 @@
 package organisation;
 
 interface InterfaceEmployee {
-    public String DEFAULT_POSITION = "Engineer";
-    public int DEFAULT_SALARY = 30000;
+    public static String DEFAULT_POSITION = "Engineer";
+    public static int DEFAULT_SALARY = 30000;
     String getEmployeeFirstName();
     void setEmployeeFirstName(String firstName);
     String getEmployeeLastName();
