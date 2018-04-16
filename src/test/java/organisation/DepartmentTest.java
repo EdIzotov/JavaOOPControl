@@ -3,8 +3,6 @@ package organisation;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
-import java.util.Arrays;
-
 public class DepartmentTest {
     private String firstName = "Vasiliy";
     private String lastName = "Ivanov";
