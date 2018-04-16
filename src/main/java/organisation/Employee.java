@@ -2,7 +2,7 @@ package organisation;
 
 import java.util.Comparator;
 
-public class Employee implements InterfaceEmployee, Comparable<Employee> {
+public class Employee implements InterfaceEmployee {
 
     private String firstName;
     private String lastName;
@@ -46,15 +46,44 @@ public class Employee implements InterfaceEmployee, Comparable<Employee> {
     public void setEmployeeSalary(int salary) {
         this.salary = salary;
     }
-    public int compareTo(Employee compareEmployee) {
-        int compareSalary = compareEmployee.getEmployeeSalary();
-        return this.salary - compareSalary;
-    }
-    public static Comparator<Employee> nameComparator = new Comparator<Employee>() {
+    protected static Comparator<Employee> salaryComparatorAscending = new Comparator<Employee>() {
+        public int compare(Employee emp1, Employee emp2) {
+            Integer empSalary1 = emp1.getEmployeeSalary();
+            Integer empSalary2 = emp2.getEmployeeSalary();
+            return empSalary1.compareTo(empSalary2);
+        }
+    };
+    protected static Comparator<Employee> salaryComparatorDescending = new Comparator<Employee>() {
+        public int compare(Employee emp1, Employee emp2) {
+            Integer empSalary1 = emp1.getEmployeeSalary();
+            Integer empSalary2 = emp2.getEmployeeSalary();
+            return empSalary2.compareTo(empSalary1);
+        }
+    };
+    protected static Comparator<Employee> nameComparatorAscending = new Comparator<Employee>() {
         public int compare(Employee emp1, Employee emp2) {
             String empLastName1 = emp1.getEmployeeLastName();
             String empLastName2 = emp2.getEmployeeLastName();
-            return empLastName1.compareTo(empLastName2);
+            int lastNameComp = empLastName1.compareTo(empLastName2);
+            if (lastNameComp != 0) {
+                return lastNameComp;
+            }
+            String empFirstName1 = emp1.getEmployeeFirstName();
+            String empFirstName2 = emp2.getEmployeeFirstName();
+            return empFirstName1.compareTo(empFirstName2);
+        }
+    };
+    protected static Comparator<Employee> nameComparatorDescending = new Comparator<Employee>() {
+        public int compare(Employee emp1, Employee emp2) {
+            String empLastName1 = emp1.getEmployeeLastName();
+            String empLastName2 = emp2.getEmployeeLastName();
+            int lastNameComp = empLastName2.compareTo(empLastName1);
+            if (lastNameComp != 0) {
+                return lastNameComp;
+            }
+            String empFirstName1 = emp1.getEmployeeFirstName();
+            String empFirstName2 = emp2.getEmployeeFirstName();
+            return empFirstName2.compareTo(empFirstName1);
         }
     };
 }

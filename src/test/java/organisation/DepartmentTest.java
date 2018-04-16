@@ -3,6 +3,8 @@ package organisation;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
+import java.util.Arrays;
+
 public class DepartmentTest {
     private String firstName = "Vasiliy";
     private String lastName = "Ivanov";
@@ -34,7 +36,10 @@ public class DepartmentTest {
         assertEquals(departmentName, myDepartment.getDepartmentName());
         assertEquals(defaultDepartmentSize, myDepartment.getDepartmentEmployeesQty());
         assertEquals(defaultDepartmentSize, myDepartment.getAllDepartmentEmployees().length);
-        assertEquals(defaultDepartmentSize, myDepartment.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(defaultDepartmentSize, myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(defaultDepartmentSize, myDepartment.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(defaultDepartmentSize, myDepartment.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(defaultDepartmentSize, myDepartment.getAllDepartmentEmployeesSortedByNameDes().length);
     }
     @Test
     public void testConstructorExtended() {
@@ -43,12 +48,18 @@ public class DepartmentTest {
         assertEquals(departmentName, myDepartment.getDepartmentName());
         assertEquals(employeeArr.length, myDepartment.getDepartmentEmployeesQty());
         assertEquals(employeeArr.length, myDepartment.getAllDepartmentEmployees().length);
-        assertEquals(employeeArr.length, myDepartment.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(employeeArr.length, myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(employeeArr.length, myDepartment.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(employeeArr.length, myDepartment.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(employeeArr.length, myDepartment.getAllDepartmentEmployeesSortedByNameDes().length);
         Employee[] employeeArr1 = {myEmployee, myEmployee1, myEmployee2, myEmployee3};
         Department myDepartment1 = new Department(departmentName1, employeeArr1);
         assertEquals(employeeArr1.length, myDepartment1.getDepartmentEmployeesQty());
         assertEquals(employeeArr1.length, myDepartment1.getAllDepartmentEmployees().length);
-        assertEquals(employeeArr1.length, myDepartment1.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(employeeArr1.length, myDepartment1.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(employeeArr1.length, myDepartment1.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(employeeArr1.length, myDepartment1.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(employeeArr1.length, myDepartment1.getAllDepartmentEmployeesSortedByNameDes().length);
     }
     @Test
     public void testSetDepartmentName() {
@@ -65,20 +76,32 @@ public class DepartmentTest {
         myDepartment.hireDepartmentEmployee(myEmployee);
         assertEquals(defaultDepartmentSize + 1, myDepartment.getDepartmentEmployeesQty());
         assertEquals(defaultDepartmentSize + 1, myDepartment.getAllDepartmentEmployees().length);
-        assertEquals(defaultDepartmentSize + 1, myDepartment.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(defaultDepartmentSize + 1, myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(defaultDepartmentSize + 1, myDepartment.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(defaultDepartmentSize + 1, myDepartment.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(defaultDepartmentSize + 1, myDepartment.getAllDepartmentEmployeesSortedByNameDes().length);
         myDepartment.hireDepartmentEmployee(myEmployee1);
         assertEquals(defaultDepartmentSize + 2, myDepartment.getDepartmentEmployeesQty());
         assertEquals(defaultDepartmentSize + 2, myDepartment.getAllDepartmentEmployees().length);
-        assertEquals(defaultDepartmentSize + 2, myDepartment.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(defaultDepartmentSize + 2, myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(defaultDepartmentSize + 2, myDepartment.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(defaultDepartmentSize + 2, myDepartment.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(defaultDepartmentSize + 2, myDepartment.getAllDepartmentEmployeesSortedByNameDes().length);
         Employee[] employeeArr = {myEmployee1, myEmployee2, myEmployee3};
         Department myDepartment1 = new Department(departmentName1, employeeArr);
         assertEquals(employeeArr.length, myDepartment1.getDepartmentEmployeesQty());
         assertEquals(employeeArr.length, myDepartment1.getAllDepartmentEmployees().length);
-        assertEquals(employeeArr.length, myDepartment1.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(employeeArr.length, myDepartment1.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(employeeArr.length, myDepartment1.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(employeeArr.length, myDepartment1.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(employeeArr.length, myDepartment1.getAllDepartmentEmployeesSortedByNameDes().length);
         myDepartment1.hireDepartmentEmployee(myEmployee);
         assertEquals(employeeArr.length + 1, myDepartment1.getDepartmentEmployeesQty());
         assertEquals(employeeArr.length + 1, myDepartment1.getAllDepartmentEmployees().length);
-        assertEquals(employeeArr.length + 1, myDepartment1.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(employeeArr.length + 1, myDepartment1.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(employeeArr.length + 1, myDepartment1.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(employeeArr.length + 1, myDepartment1.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(employeeArr.length + 1, myDepartment1.getAllDepartmentEmployeesSortedByNameDes().length);
     }
     @Test
     public void testFireDepartmentEmployee() {
@@ -88,15 +111,24 @@ public class DepartmentTest {
         myDepartment.fireDepartmentEmployee(myEmployee.getEmployeeLastName(), myEmployee.getEmployeeFirstName(), myEmployee.getEmployeePosition());
         assertEquals(employeeArr.length - 1, myDepartment.getDepartmentEmployeesQty());
         assertEquals(employeeArr.length - 1, myDepartment.getAllDepartmentEmployees().length);
-        assertEquals(employeeArr.length - 1, myDepartment.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(employeeArr.length - 1, myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(employeeArr.length - 1, myDepartment.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(employeeArr.length - 1, myDepartment.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(employeeArr.length - 1, myDepartment.getAllDepartmentEmployeesSortedByNameDes().length);
         myDepartment.fireDepartmentEmployee(myEmployee1.getEmployeeLastName(), myEmployee1.getEmployeeFirstName(), myEmployee1.getEmployeePosition());
         assertEquals(employeeArr.length - 2, myDepartment.getDepartmentEmployeesQty());
         assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployees().length);
-        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedByNameDes().length);
         myDepartment.fireDepartmentEmployee(myEmployee2.getEmployeeLastName(), myEmployee2.getEmployeeFirstName(), myEmployee2.getEmployeePosition());
         assertEquals(employeeArr.length - 2, myDepartment.getDepartmentEmployeesQty());
         assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployees().length);
-        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedBySalary().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedBySalaryDes().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedByNameAsc().length);
+        assertEquals(employeeArr.length - 2, myDepartment.getAllDepartmentEmployeesSortedByNameDes().length);
     }
     @Test
     public void testGetDepartmentEmployeesSalaryAvg() {
@@ -117,26 +149,17 @@ public class DepartmentTest {
         Employee[] employeeArr = {myEmployee};
         Department myDepartment = new Department(departmentName, employeeArr);
         Employee foundEmployee = myDepartment.getDepartmentEmployeeByName(myEmployee.getEmployeeFirstName(), myEmployee.getEmployeeLastName());
-        assertEquals(myEmployee.getEmployeeFirstName(), foundEmployee.getEmployeeFirstName());
-        assertEquals(myEmployee.getEmployeeLastName(), foundEmployee.getEmployeeLastName());
-        assertEquals(myEmployee.getEmployeePosition(), foundEmployee.getEmployeePosition());
-        assertEquals(myEmployee.getEmployeeSalary(), foundEmployee.getEmployeeSalary());
+        assertEquals(myEmployee, foundEmployee);
         Employee[] employeeArr1 = {myEmployee, myEmployee1, myEmployee2, myEmployee3};
         Department myDepartment1 = new Department(departmentName1, employeeArr1);
         Employee foundEmployee1 = myDepartment1.getDepartmentEmployeeByName(myEmployee3.getEmployeeFirstName(), myEmployee3.getEmployeeLastName());
-        assertEquals(myEmployee3.getEmployeeFirstName(), foundEmployee1.getEmployeeFirstName());
-        assertEquals(myEmployee3.getEmployeeLastName(), foundEmployee1.getEmployeeLastName());
-        assertEquals(myEmployee3.getEmployeePosition(), foundEmployee1.getEmployeePosition());
-        assertEquals(myEmployee3.getEmployeeSalary(), foundEmployee1.getEmployeeSalary());
+        assertEquals(myEmployee3, foundEmployee1);
         Employee[] employeeArr2 = {myEmployee, myEmployee1, myEmployee3};
         Department myDepartment2 = new Department(departmentName2, employeeArr2);
         assertNull(myDepartment2.getDepartmentEmployeeByName(myEmployee2.getEmployeeFirstName(), myEmployee2.getEmployeeLastName()));
         myDepartment2.hireDepartmentEmployee(myEmployee2);
         Employee foundEmployee2 = myDepartment2.getDepartmentEmployeeByName(myEmployee2.getEmployeeFirstName(), myEmployee2.getEmployeeLastName());
-        assertEquals(myEmployee2.getEmployeeFirstName(), foundEmployee2.getEmployeeFirstName());
-        assertEquals(myEmployee2.getEmployeeLastName(), foundEmployee2.getEmployeeLastName());
-        assertEquals(myEmployee2.getEmployeePosition(), foundEmployee2.getEmployeePosition());
-        assertEquals(myEmployee2.getEmployeeSalary(), foundEmployee2.getEmployeeSalary());
+        assertEquals(myEmployee2, foundEmployee2);
         myDepartment2.fireDepartmentEmployee(myEmployee2.getEmployeeLastName(), myEmployee2.getEmployeeFirstName(), myEmployee2.getEmployeePosition());
         assertNull(myDepartment2.getDepartmentEmployeeByName(myEmployee2.getEmployeeFirstName(), myEmployee2.getEmployeeLastName()));
     }
@@ -146,32 +169,40 @@ public class DepartmentTest {
         Department myDepartment = new Department(departmentName, employeeArr);
         assertEquals(employeeArr.length, myDepartment.getAllDepartmentEmployees().length);
         Employee foundEmployee = myDepartment.getDepartmentEmployeeByName(myEmployee.getEmployeeFirstName(), myEmployee.getEmployeeLastName());
-        assertEquals(myEmployee.getEmployeeFirstName(), foundEmployee.getEmployeeFirstName());
-        assertEquals(myEmployee.getEmployeeLastName(), foundEmployee.getEmployeeLastName());
-        assertEquals(myEmployee.getEmployeePosition(), foundEmployee.getEmployeePosition());
-        assertEquals(myEmployee.getEmployeeSalary(), foundEmployee.getEmployeeSalary());
+        assertEquals(myEmployee, foundEmployee);
         Employee foundEmployee1 = myDepartment.getDepartmentEmployeeByName(myEmployee1.getEmployeeFirstName(), myEmployee1.getEmployeeLastName());
-        assertEquals(myEmployee1.getEmployeeFirstName(), foundEmployee1.getEmployeeFirstName());
-        assertEquals(myEmployee1.getEmployeeLastName(), foundEmployee1.getEmployeeLastName());
-        assertEquals(myEmployee1.getEmployeePosition(), foundEmployee1.getEmployeePosition());
-        assertEquals(myEmployee1.getEmployeeSalary(), foundEmployee1.getEmployeeSalary());
+        assertEquals(myEmployee1, foundEmployee1);
         Employee foundEmployee2 = myDepartment.getDepartmentEmployeeByName(myEmployee2.getEmployeeFirstName(), myEmployee2.getEmployeeLastName());
-        assertEquals(myEmployee2.getEmployeeFirstName(), foundEmployee2.getEmployeeFirstName());
-        assertEquals(myEmployee2.getEmployeeLastName(), foundEmployee2.getEmployeeLastName());
-        assertEquals(myEmployee2.getEmployeePosition(), foundEmployee2.getEmployeePosition());
-        assertEquals(myEmployee2.getEmployeeSalary(), foundEmployee2.getEmployeeSalary());
+        assertEquals(myEmployee2, foundEmployee2);
         Employee foundEmployee3 = myDepartment.getDepartmentEmployeeByName(myEmployee3.getEmployeeFirstName(), myEmployee3.getEmployeeLastName());
-        assertEquals(myEmployee3.getEmployeeFirstName(), foundEmployee3.getEmployeeFirstName());
-        assertEquals(myEmployee3.getEmployeeLastName(), foundEmployee3.getEmployeeLastName());
-        assertEquals(myEmployee3.getEmployeePosition(), foundEmployee3.getEmployeePosition());
-        assertEquals(myEmployee3.getEmployeeSalary(), foundEmployee3.getEmployeeSalary());
+        assertEquals(myEmployee3, foundEmployee3);
         Employee[] employeesInDepartment = myDepartment.getAllDepartmentEmployees();
         for (int i = 0; i < employeesInDepartment.length; i++) {
             assertEquals(employeeArr[i], employeesInDepartment[i]);
         }
-        Employee[] employeesInDepartment1 = myDepartment.getAllDepartmentEmployeesSortedBySalary();
-        for (int i = 0; i < (employeesInDepartment1.length - 1); i++) {
-            assertTrue(employeesInDepartment1[i].getEmployeeSalary() <= employeesInDepartment1[i + 1].getEmployeeSalary());
+    }
+    @Test
+    public void testGetAllDepartmentEmployeesSortedBySalary() {
+        Employee[] employeeArr = {myEmployee2, myEmployee3, myEmployee1, myEmployee};
+        Department myDepartment = new Department(departmentName, employeeArr);
+        Employee[] employeesSortedBySalaryAsceding = myDepartment.getAllDepartmentEmployeesSortedBySalaryAsc();
+        for (int i = 0; i < employeesSortedBySalaryAsceding.length - 1; i++) {
+            assertTrue(employeesSortedBySalaryAsceding[i].getEmployeeSalary() <= employeesSortedBySalaryAsceding[i + 1].getEmployeeSalary());
         }
+        Employee[] employeesSortedBySalaryDesceding = myDepartment.getAllDepartmentEmployeesSortedBySalaryDes();
+        for (int i = 0; i < employeesSortedBySalaryDesceding.length - 1; i++) {
+            assertTrue(employeesSortedBySalaryDesceding[i].getEmployeeSalary() >= employeesSortedBySalaryDesceding[i + 1].getEmployeeSalary());
+        }
+    }
+    @Test
+    public void testGetAllDepartmentEmployeesSortedByName() {
+        Employee[] employeeArr = {myEmployee2, myEmployee3, myEmployee1, myEmployee};
+        Employee[] employeeArrOrderedAsc = {myEmployee, myEmployee1, myEmployee2, myEmployee3};
+        Employee[] employeeArrOrderedDes = {myEmployee3, myEmployee2, myEmployee1, myEmployee};
+        Department myDepartment = new Department(departmentName, employeeArr);
+        Employee[] employeesSortedByNameAsceding = myDepartment.getAllDepartmentEmployeesSortedByNameAsc();
+        assertEquals(employeeArrOrderedAsc, employeesSortedByNameAsceding);
+        Employee[] employeesSortedByNameDesceding = myDepartment.getAllDepartmentEmployeesSortedByNameDes();
+        assertEquals(employeeArrOrderedDes, employeesSortedByNameDesceding);
     }
 }

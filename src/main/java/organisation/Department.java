@@ -78,14 +78,24 @@ public class Department implements InterfaceDepartment {
     public Employee[] getAllDepartmentEmployees() {
         return departmentEmployees;
     }
-    public Employee[] getAllDepartmentEmployeesSortedBySalary() {
+    public Employee[] getAllDepartmentEmployeesSortedBySalaryAsc() {
         Employee[] tempDepartmentEmployees = departmentEmployees.clone();
-        Arrays.sort(tempDepartmentEmployees);
+        Arrays.sort(tempDepartmentEmployees, Employee.salaryComparatorAscending);
         return tempDepartmentEmployees;
     }
-    public Employee[] getAllDepartmentEmployeesSortedByName() {
+    public Employee[] getAllDepartmentEmployeesSortedBySalaryDes() {
         Employee[] tempDepartmentEmployees = departmentEmployees.clone();
-      //  Arrays.sort(tempDepartmentEmployees);
+        Arrays.sort(tempDepartmentEmployees, Employee.salaryComparatorDescending);
+        return tempDepartmentEmployees;
+    }
+    public Employee[] getAllDepartmentEmployeesSortedByNameAsc() {
+        Employee[] tempDepartmentEmployees = departmentEmployees.clone();
+        Arrays.sort(tempDepartmentEmployees, Employee.nameComparatorAscending);
+        return tempDepartmentEmployees;
+    }
+    public Employee[] getAllDepartmentEmployeesSortedByNameDes() {
+        Employee[] tempDepartmentEmployees = departmentEmployees.clone();
+        Arrays.sort(tempDepartmentEmployees, Employee.nameComparatorDescending);
         return tempDepartmentEmployees;
     }
 }

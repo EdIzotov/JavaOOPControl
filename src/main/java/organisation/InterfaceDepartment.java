@@ -10,6 +10,8 @@ interface InterfaceDepartment {
     void fireDepartmentEmployee(String lastName, String firstName, String position);
     void hireDepartmentEmployee(Employee newEmployee);
     Employee[] getAllDepartmentEmployees();
-    Employee[] getAllDepartmentEmployeesSortedBySalary();
-    Employee[] getAllDepartmentEmployeesSortedByName();
+    Employee[] getAllDepartmentEmployeesSortedBySalaryAsc();
+    Employee[] getAllDepartmentEmployeesSortedBySalaryDes();
+    Employee[] getAllDepartmentEmployeesSortedByNameAsc();
+    Employee[] getAllDepartmentEmployeesSortedByNameDes();
 }
