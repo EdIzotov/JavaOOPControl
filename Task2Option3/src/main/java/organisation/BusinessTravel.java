@@ -89,6 +89,8 @@ public class BusinessTravel implements InterfaceBusinessTravel {
         return numberOfTravelDays;
     };
     public int getTotalAmount() {
-        return 0;
+        int numberOfTravelDays = getNumberOfTravelDays();
+        int totalAmount = travelTotalForward + travelTotalBack + dailyAmount * numberOfTravelDays;
+        return totalAmount;
     };
 }
