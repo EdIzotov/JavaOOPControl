@@ -1,7 +1,9 @@
 package organisation;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import static java.lang.Math.toIntExact;
 
 public class FullDayEmployee extends Employee implements InterfaceFullDayEmployee {
     private ArrayList<BusinessTravel> businessTravelsArray;
@@ -21,25 +23,36 @@ public class FullDayEmployee extends Employee implements InterfaceFullDayEmploye
     public int getMonthPremiumAmount() {
         int monthPremiumAmount;
         Date hireDate = super.getEmployeeHireDate();
-        System.out.println(hireDate);
-        return 0;
+        Calendar calendarNow = Calendar.getInstance();
+        Calendar calendarHire = Calendar.getInstance();
+        calendarHire.setTime(hireDate);
+        int years = calendarNow.get(Calendar.YEAR) - calendarHire.get(Calendar.YEAR);
+        if ((calendarHire.get(Calendar.MONTH) > calendarNow.get(Calendar.MONTH)) || (calendarHire.get(Calendar.MONTH) == calendarNow.get(Calendar.MONTH) && 
+        calendarHire.get(Calendar.DATE) > calendarNow.get(Calendar.DATE))) {
+            if (years > 0) {
+                years--;
+            }
+        }
+        monthPremiumAmount = Math.round((float) years / 20f * (float) getEmployeeSalary());
+        if (calendarNow.get(Calendar.MONTH) == 0) {
+            monthPremiumAmount += getEmployeeSalary();
+        }
+        return monthPremiumAmount;
     }
     public void addBusinessTravel(BusinessTravel businessTravel) {
         businessTravelsArray.add(businessTravel);        
     }
     public void removeBusinessTravel(Date departureDate) {
         for (BusinessTravel busTrav: businessTravelsArray) {
-            if ((departureDate.getTime() >= busTrav.getDepartureDate().getTime()) && departureDate.getTime() <= busTrav.getArrivalDate().getTime()) {
+            if ((departureDate.getTime() / InterfaceBusinessTravel.DAYS_BETWEEN_DATES) == (busTrav.getArrivalDate().getTime() / InterfaceBusinessTravel.DAYS_BETWEEN_DATES)) {
                 businessTravelsArray.remove(busTrav);
-                break;
             }
         }
     }
     public BusinessTravel getBusinessTravel(Date businessTravelDate) {
         for (BusinessTravel busTrav: businessTravelsArray) {
             if ((businessTravelDate.getTime() >= busTrav.getDepartureDate().getTime()) && businessTravelDate.getTime() <= busTrav.getArrivalDate().getTime()) {
-                int indexOfBusTravel = businessTravelsArray.indexOf(busTrav);
-                return businessTravelsArray.get(indexOfBusTravel);
+                return businessTravelsArray.get(businessTravelsArray.indexOf(busTrav));
             }
         }
         return null;
@@ -47,11 +60,14 @@ public class FullDayEmployee extends Employee implements InterfaceFullDayEmploye
     public int getBusinessTravelDaysAvg() {
         int businessTravelDays = 0;
         for (BusinessTravel busTrav: businessTravelsArray) {
-            continue;
+            businessTravelDays += busTrav.getNumberOfTravelDays();
         }
-        return 0;
+        return Math.round(((float) businessTravelDays) / ((float) businessTravelsArray.size()));
     }
     public int getDaysBetweenBusinessTravelsAvg() {
-        return 0;
+        Date hire = getEmployeeHireDate();
+        Calendar myCalendar = Calendar.getInstance();
+        int daysOfWork = toIntExact((myCalendar.getTimeInMillis() - hire.getTime()) / InterfaceBusinessTravel.DAYS_BETWEEN_DATES);
+        return ((daysOfWork - (getBusinessTravelDaysAvg() * this.businessTravelsArray.size())) / (this.businessTravelsArray.size() - 1));
     }
 }

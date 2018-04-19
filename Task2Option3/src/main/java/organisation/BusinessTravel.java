@@ -1,6 +1,7 @@
 package organisation;
 
 import java.util.Date;
+
 import static java.lang.Math.toIntExact;
 
 public class BusinessTravel implements InterfaceBusinessTravel {
@@ -29,7 +30,7 @@ public class BusinessTravel implements InterfaceBusinessTravel {
     }
     public Date getDepartureDate() {
         return departureDate;
-    };
+    }
     public void setDepartureDate(Date departureDate) {
         if ((departureDate != null) && (this.arrivalDate != null)) {
             if (departureDate.getTime() >= this.arrivalDate.getTime()) {
@@ -37,10 +38,10 @@ public class BusinessTravel implements InterfaceBusinessTravel {
             }
         }
         this.departureDate = departureDate;
-    };
+    }
     public Date getArrivalDate() {
         return arrivalDate;
-    };
+    }
     public void setArrivalDate(Date arrivalDate) {
         if ((this.departureDate != null) && (arrivalDate != null)) {
             if (arrivalDate.getTime() <= this.departureDate.getTime()) {
@@ -48,49 +49,45 @@ public class BusinessTravel implements InterfaceBusinessTravel {
             }
         }
         this.arrivalDate = arrivalDate;
-    };
+    }
     public int getTravelTotalForward() {
         return travelTotalForward;
-    };
+    }
     public void setTravelTotalForward(int travelTotalForward) {
         if (travelTotalForward < 0) {
             throw new IllegalArgumentException("TravelForward amount or TravelBack or DailyAmount is less that 0: " + travelTotalForward);
         }
         this.travelTotalForward = travelTotalForward;
-    };
+    }
     public int getTravelTotalBack() {
         return travelTotalBack;
-    };
+    }
     public void setTravelTotalBack(int travelTotalBack) {
         if (travelTotalBack < 0) {
             throw new IllegalArgumentException("TravelForward amount or TravelBack or DailyAmount is less that 0: " + travelTotalBack);
         }
         this.travelTotalBack = travelTotalBack;
-    };
+    }
     public int getDailyAmount() {
         return dailyAmount;
-    };
+    }
     public void setDailyAmount(int dailyAmount) {
         if (dailyAmount < 0) {
             throw new IllegalArgumentException("TravelForward amount or TravelBack or DailyAmount is less that 0: " + dailyAmount);
         }
         this.dailyAmount = dailyAmount;
-    };
-    public int getNumberOfTravelDays() {
-        int numberOfTravelDays;
+    }
+    public int getNumberOfTravelDays() throws IllegalArgumentException {
+        long numberOfDays = 0;
         if ((this.departureDate != null) && (this.arrivalDate != null)) {
-            numberOfTravelDays = toIntExact((arrivalDate.getTime() - departureDate.getTime()) / InterfaceBusinessTravel.DAY_IN_MILLIS);
-            if (numberOfTravelDays < 0) {
-                throw new IllegalStateException("Number of travel days less than zero: " + numberOfTravelDays);
-            }
-        } else {
-            numberOfTravelDays = 0;
+            numberOfDays = (this.arrivalDate.getTime() - this.departureDate.getTime()) / InterfaceBusinessTravel.DAYS_BETWEEN_DATES;
+        }        
+        if (numberOfDays < 0) {
+            throw new IllegalArgumentException("Number of travel days less than zero: numberOfDays " + numberOfDays);
         }
-        return numberOfTravelDays;
-    };
+        return toIntExact(numberOfDays);
+    }
     public int getTotalAmount() {
-        int numberOfTravelDays = getNumberOfTravelDays();
-        int totalAmount = travelTotalForward + travelTotalBack + dailyAmount * numberOfTravelDays;
-        return totalAmount;
-    };
+        return travelTotalForward + travelTotalBack + dailyAmount * getNumberOfTravelDays();
+    }
 }

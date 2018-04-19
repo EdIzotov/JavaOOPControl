@@ -13,7 +13,6 @@ public class BusinessTravelTest {
     private Date dateAfterWeek;
     private Date dateAfterCentury;
     private Date dateYesterday;
-    private Date dateBeforeCentury;
     private int travelTotalForward;
     private int travelTotalForward2;
     private int travelTotalBack;
@@ -23,9 +22,8 @@ public class BusinessTravelTest {
 
     @BeforeClass
     public void initializeBusinessTravels() {
-        dateToday = new Date();
         Calendar myCalendar = Calendar.getInstance();
-        myCalendar.setTime(dateToday);
+        dateToday = myCalendar.getTime();
         myCalendar.add(Calendar.DATE, 1);
         dateTomorrow = myCalendar.getTime();
         myCalendar.setTime(dateToday);
@@ -39,7 +37,6 @@ public class BusinessTravelTest {
         dateYesterday = myCalendar.getTime();
         myCalendar.setTime(dateToday);
         myCalendar.add(Calendar.DATE, -1 * (365 * 100));
-        dateBeforeCentury = myCalendar.getTime();
         travelTotalForward = 700;
         travelTotalForward2 = 100;
         travelTotalBack = 900;
@@ -65,7 +62,7 @@ public class BusinessTravelTest {
         assertEquals(travelTotalForward, myBusinessTravel.getTravelTotalForward());
         assertEquals(travelTotalBack, myBusinessTravel.getTravelTotalBack());
         assertEquals(dailyAmount, myBusinessTravel.getDailyAmount());
-        int numberOfTravelDays = toIntExact((dateAfterWeek.getTime() - dateTomorrow.getTime()) / InterfaceBusinessTravel.DAY_IN_MILLIS);
+        int numberOfTravelDays = toIntExact((dateAfterWeek.getTime() - dateTomorrow.getTime()) / InterfaceBusinessTravel.DAYS_BETWEEN_DATES);
         assertEquals(numberOfTravelDays, myBusinessTravel.getNumberOfTravelDays());
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -230,5 +227,21 @@ public class BusinessTravelTest {
         BusinessTravel myBusinessTravel = new BusinessTravel(dateToday, dateAfterWeek, travelTotalForward, travelTotalBack, dailyAmount);
         int negative = -1;
         myBusinessTravel.setDailyAmount(negative);
+    }
+    @Test
+    public void testGetNumberOfTravelDays() {
+        BusinessTravel myBusinessTravel = new BusinessTravel();
+        assertTrue(myBusinessTravel.getNumberOfTravelDays() == 0);
+        BusinessTravel myBusinessTravel1 = new BusinessTravel(dateToday, dateAfterWeek, travelTotalForward, travelTotalBack, dailyAmount);
+        int numberOfTravelDays = toIntExact((dateAfterWeek.getTime() - dateToday.getTime()) / InterfaceBusinessTravel.DAYS_BETWEEN_DATES);
+        assertEquals(numberOfTravelDays, myBusinessTravel1.getNumberOfTravelDays());
+    }
+    @Test
+    public void testGetTotalAmount() {
+        BusinessTravel myBusinessTravel = new BusinessTravel();
+        assertTrue(myBusinessTravel.getTotalAmount() == 0);
+        BusinessTravel myBusinessTravel1 = new BusinessTravel(dateToday, dateAfterWeek, travelTotalForward, travelTotalBack, dailyAmount);
+        int amount = travelTotalForward + travelTotalBack + dailyAmount * myBusinessTravel1.getNumberOfTravelDays();
+        assertEquals(amount, myBusinessTravel1.getTotalAmount());
     }
 }
