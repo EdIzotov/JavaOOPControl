@@ -18,7 +18,7 @@ public class HalfDayEmployeeTest {
 
     @Test
     public void testConstructorDefault() {
-        Employee myEmployee = new FullDayEmployee(firstName, lastName);
+        HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName);
         assertEquals(firstName, myEmployee.getEmployeeFirstName());
         assertEquals(lastName, myEmployee.getEmployeeLastName());
         assertEquals(defaultPosition, myEmployee.getEmployeePosition());
@@ -26,7 +26,7 @@ public class HalfDayEmployeeTest {
     }
     @Test
     public void testConstructorExtended() {
-        Employee myEmployee = new FullDayEmployee(firstName, lastName, position, salary);
+        HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName, position, salary);
         assertEquals(firstName, myEmployee.getEmployeeFirstName());
         assertEquals(lastName, myEmployee.getEmployeeLastName());
         assertEquals(position, myEmployee.getEmployeePosition());
@@ -34,28 +34,28 @@ public class HalfDayEmployeeTest {
     }
     @Test
     public void testSetEmployeeFirstName() {
-        Employee myEmployee = new FullDayEmployee(firstName, lastName, position, salary);
+        HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName, position, salary);
         assertNotEquals(firstName, firstName1);
         myEmployee.setEmployeeFirstName(firstName1);
         assertEquals(firstName1, myEmployee.getEmployeeFirstName());
     }
     @Test
     public void testSetEmployeeLastName() {
-        Employee myEmployee = new FullDayEmployee(firstName, lastName, position, salary);
+        HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName, position, salary);
         assertNotEquals(lastName, lastName1);
         myEmployee.setEmployeeLastName(lastName1);
         assertEquals(lastName1, myEmployee.getEmployeeLastName());
     }
     @Test
     public void testSetEmployeePosition() {
-        Employee myEmployee = new FullDayEmployee(firstName, lastName, position, salary);
+        HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName, position, salary);
         assertNotEquals(position, position1);
         myEmployee.setEmployeePosition(position1);
         assertEquals(position1, myEmployee.getEmployeePosition());
     }
     @Test
     public void testSetEmployeeSalary() {
-        Employee myEmployee = new FullDayEmployee(firstName, lastName, position, salary);
+        HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName, position, salary);
         assertNotEquals(salary, salary1);
         myEmployee.setEmployeeSalary(salary1);
         assertEquals(salary1, myEmployee.getEmployeeSalary());
