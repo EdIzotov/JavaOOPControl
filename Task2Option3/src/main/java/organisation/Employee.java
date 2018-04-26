@@ -5,6 +5,8 @@ import java.util.Date;
 
 public abstract class Employee implements InterfaceEmployee {
 
+    public static final JobTitles DEFAULT_POSITION = JobTitles.Engineer;
+    public static final int DEFAULT_SALARY = 30000;
     private String firstName;
     private String lastName;
     private JobTitles position;
@@ -14,8 +16,8 @@ public abstract class Employee implements InterfaceEmployee {
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.position = InterfaceEmployee.DEFAULT_POSITION;
-        this.salary = InterfaceEmployee.DEFAULT_SALARY;
+        this.position = DEFAULT_POSITION;
+        this.salary = DEFAULT_SALARY;
         this.hireDate = new Date();
     }
     public Employee(String firstName, String lastName, JobTitles position, int salary) {
@@ -56,20 +58,32 @@ public abstract class Employee implements InterfaceEmployee {
     public JobTitles getEmployeePosition() {
         return position;
     }
-    public void setEmployeePosition(JobTitles position) {
-        this.position = position;
+    public void setEmployeePosition(JobTitles position) throws IllegalArgumentException {
+        if (position == null) {
+            throw new IllegalArgumentException("Incorrect value is not allowed");
+        } else {
+            this.position = position;
+        }
     }
     public int getEmployeeSalary() {
         return salary;
     }
-    public void setEmployeeSalary(int salary) {
-        this.salary = salary;
+    public void setEmployeeSalary(int salary) throws IllegalArgumentException {
+        if (salary < 0) {
+            throw new IllegalArgumentException("Incorrect value is not allowed");
+        } else {
+            this.salary = salary;
+        }
     }
     public Date getEmployeeHireDate() {
         return hireDate;
     }
-    public void setEmployeeHireDate(Date hireDate) {
-        this.hireDate = hireDate;
+    public void setEmployeeHireDate(Date hireDate) throws IllegalArgumentException {
+        if (hireDate == null) {
+            throw new IllegalArgumentException("Incorrect value is not allowed");
+        } else {
+            this.hireDate = hireDate;
+        }
     }
     public abstract int getMonthPremiumAmount();
 

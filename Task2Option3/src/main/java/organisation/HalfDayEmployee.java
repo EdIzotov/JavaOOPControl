@@ -3,7 +3,7 @@ package organisation;
 import java.util.Date;
 
 public class HalfDayEmployee extends Employee {
-
+    
     public HalfDayEmployee(String firstName, String lastName) {
         super(firstName, lastName);
     }

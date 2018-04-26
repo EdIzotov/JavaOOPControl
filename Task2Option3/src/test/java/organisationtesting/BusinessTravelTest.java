@@ -1,7 +1,8 @@
-package organisation;
+package organisationtesting;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import organisation.*;
 import static org.testng.Assert.*;
 import static java.lang.Math.toIntExact;
 import java.util.Calendar;
@@ -62,7 +63,7 @@ public class BusinessTravelTest {
         assertEquals(travelTotalForward, myBusinessTravel.getTravelTotalForward());
         assertEquals(travelTotalBack, myBusinessTravel.getTravelTotalBack());
         assertEquals(dailyAmount, myBusinessTravel.getDailyAmount());
-        int numberOfTravelDays = toIntExact((dateAfterWeek.getTime() - dateTomorrow.getTime()) / InterfaceBusinessTravel.DAYS_BETWEEN_DATES);
+        int numberOfTravelDays = toIntExact((dateAfterWeek.getTime() - dateTomorrow.getTime()) / BusinessTravel.DAYS_BETWEEN_DATES);
         assertEquals(numberOfTravelDays, myBusinessTravel.getNumberOfTravelDays());
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -233,7 +234,7 @@ public class BusinessTravelTest {
         BusinessTravel myBusinessTravel = new BusinessTravel();
         assertTrue(myBusinessTravel.getNumberOfTravelDays() == 0);
         BusinessTravel myBusinessTravel1 = new BusinessTravel(dateToday, dateAfterWeek, travelTotalForward, travelTotalBack, dailyAmount);
-        int numberOfTravelDays = toIntExact((dateAfterWeek.getTime() - dateToday.getTime()) / InterfaceBusinessTravel.DAYS_BETWEEN_DATES);
+        int numberOfTravelDays = toIntExact((dateAfterWeek.getTime() - dateToday.getTime()) / BusinessTravel.DAYS_BETWEEN_DATES);
         assertEquals(numberOfTravelDays, myBusinessTravel1.getNumberOfTravelDays());
     }
     @Test

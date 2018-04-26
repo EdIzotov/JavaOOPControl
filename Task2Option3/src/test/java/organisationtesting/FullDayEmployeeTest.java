@@ -1,11 +1,11 @@
-package organisation;
+package organisationtesting;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
-
 import java.util.Calendar;
 import java.util.Date;
+import organisation.*;
 
 public class FullDayEmployeeTest {
     private String firstName = "Vasiliy";
@@ -18,12 +18,10 @@ public class FullDayEmployeeTest {
     private int salary1 = 28000;
     private Date dateToday;
     private Date dateTomorrow;
-    private Date dateAfterWeek;
-    private Date dateAfterCentury;
     private Date dateYesterday;
 
-    private JobTitles defaultPosition = InterfaceEmployee.DEFAULT_POSITION;
-    private int defaultSalary = InterfaceEmployee.DEFAULT_SALARY;
+    private JobTitles defaultPosition = FullDayEmployee.DEFAULT_POSITION;
+    private int defaultSalary = FullDayEmployee.DEFAULT_SALARY;
 
     @BeforeClass
     public void beforeClassInits() {
@@ -34,10 +32,8 @@ public class FullDayEmployeeTest {
         dateTomorrow = myCalendar.getTime();
         myCalendar.setTime(dateToday);
         myCalendar.add(Calendar.DATE, 7);
-        dateAfterWeek = myCalendar.getTime();
         myCalendar.setTime(dateToday);
         myCalendar.add(Calendar.DATE, 365 * 100);
-        dateAfterCentury = myCalendar.getTime();
         myCalendar.setTime(dateToday);
         myCalendar.add(Calendar.DATE, -1);
         dateYesterday = myCalendar.getTime();

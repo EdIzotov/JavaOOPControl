@@ -5,12 +5,13 @@ import java.util.Arrays;
 
 public class Department implements InterfaceDepartment {
     
+    public static final int DEFAULT_DEPARTMENT_EMPLOYEES = 0;
     private String departmentName;
     private Employee[] departmentEmployees;
 
     public Department(String departmentName) {
         this.departmentName = departmentName;
-        departmentEmployees = new Employee[InterfaceDepartment.DEFAULT_DEPARTMENT_EMPLOYEES];
+        departmentEmployees = new Employee[DEFAULT_DEPARTMENT_EMPLOYEES];
     }
     public Department(String departmentName, Employee[] departmentEmployees) {
         this.departmentName = departmentName;

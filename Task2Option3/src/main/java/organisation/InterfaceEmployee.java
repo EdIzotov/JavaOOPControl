@@ -3,8 +3,6 @@ package organisation;
 import java.util.Date;
 
 interface InterfaceEmployee {
-    public static JobTitles DEFAULT_POSITION = JobTitles.Engineer;
-    public static int DEFAULT_SALARY = 30000;
     String getEmployeeFirstName();
     void setEmployeeFirstName(String firstName) throws IllegalArgumentException;
     String getEmployeeLastName();

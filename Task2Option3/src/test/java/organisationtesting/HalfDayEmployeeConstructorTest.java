@@ -1,11 +1,11 @@
-package organisation;
+package organisationtesting;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
-
 import java.util.Calendar;
 import java.util.Date;
+import organisation.*;
 
 public class HalfDayEmployeeConstructorTest {
     private String firstName;
@@ -16,8 +16,8 @@ public class HalfDayEmployeeConstructorTest {
     private Date hireDateBefore;
     private Date hireDateAfter;
     
-    private JobTitles defaultPosition = InterfaceEmployee.DEFAULT_POSITION;
-    private int defaultSalary = InterfaceEmployee.DEFAULT_SALARY;
+    private JobTitles defaultPosition = HalfDayEmployee.DEFAULT_POSITION;
+    private int defaultSalary = HalfDayEmployee.DEFAULT_SALARY;
 
     @BeforeClass
     public void beforeMethod() {
@@ -25,8 +25,8 @@ public class HalfDayEmployeeConstructorTest {
         lastName = "Ivanov";
         position = JobTitles.OfficeManager;
         salary = 45000;
-        defaultPosition = InterfaceEmployee.DEFAULT_POSITION;
-        defaultSalary = InterfaceEmployee.DEFAULT_SALARY;
+        defaultPosition = HalfDayEmployee.DEFAULT_POSITION;
+        defaultSalary = HalfDayEmployee.DEFAULT_SALARY;
         Calendar myCalendar = Calendar.getInstance();
         hireDateNow = myCalendar.getTime();
         myCalendar.add(Calendar.DATE, -7);

@@ -1,40 +1,44 @@
-package organisation;
+package organisationtesting;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 import java.util.Calendar;
 import java.util.Date;
+import organisation.*;
 
-public class HalfDayEmployeeGetSetLastNameTest {
+public class HalfDayEmployeeGetSetSalaryTest {
     private String firstName;
     private String lastName;
-    private String lastName1;
     private JobTitles position;
     private int salary;
+    private int salary1;
+    private int negativeSalary;
     private Date hireDateNow;
 
     @BeforeClass
     public void beforeMethod() {
         firstName = "Vasiliy";
         lastName = "Ivanov";
-        lastName1 = "Petrov";
         position = JobTitles.OfficeManager;
         salary = 45000;
+        salary1 = 2500;
+        negativeSalary = -1000;
         Calendar myCalendar = Calendar.getInstance();
         hireDateNow = myCalendar.getTime();
     }
+
     @Test
-    public void testSetEmployeeLastNameConstExtHireDate() {
+    public void testSetEmployeeSalary() {
         HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName, position, salary, hireDateNow);
-        assertEquals(lastName, myEmployee.getEmployeeLastName());
-        myEmployee.setEmployeeLastName(lastName1);
-        assertEquals(lastName1, myEmployee.getEmployeeLastName());
+        assertEquals(salary, myEmployee.getEmployeeSalary());
+        myEmployee.setEmployeeSalary(salary1);
+        assertEquals(salary1, myEmployee.getEmployeeSalary());
     }
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testSetEmployeeLastNameNullValues() throws IllegalArgumentException {
+    public void testSetEmployeeSalaryNegativeValue() throws IllegalArgumentException {
         HalfDayEmployee myEmployee = new HalfDayEmployee(firstName, lastName, position, salary, hireDateNow);
-        assertEquals(lastName, myEmployee.getEmployeeLastName());
-        myEmployee.setEmployeeLastName(null);
+        assertEquals(salary, myEmployee.getEmployeeSalary());
+        myEmployee.setEmployeeSalary(negativeSalary);
     }
 }

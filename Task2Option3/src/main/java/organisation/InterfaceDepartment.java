@@ -3,7 +3,6 @@ package organisation;
 import java.util.ArrayList;
 
 interface InterfaceDepartment {
-    public static int DEFAULT_DEPARTMENT_EMPLOYEES = 0;
     String getDepartmentName();
     void setDepartmentName(String departmentName);
     int getDepartmentEmployeesQty();
