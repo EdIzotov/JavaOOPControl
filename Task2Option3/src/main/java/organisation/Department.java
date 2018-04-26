@@ -100,15 +100,27 @@ public class Department implements InterfaceDepartment {
         return tempDepartmentEmployees;
     }
     public ArrayList<FullDayEmployee> getFullDayEmployees() {
-        return null;
+        ArrayList<FullDayEmployee> employees = new ArrayList<>();
+        for (int i = 0; i < departmentEmployees.length; i++) {
+            if (departmentEmployees[i] instanceof FullDayEmployee) {
+                employees.add((FullDayEmployee) departmentEmployees[i]);
+            }
+        }
+        return employees;
     }
     public ArrayList<HalfDayEmployee> getHalfDayEmployees() {
+        ArrayList<HalfDayEmployee> employees = new ArrayList<>();
+        for (int i = 0; i < departmentEmployees.length; i++) {
+            if (departmentEmployees[i] instanceof HalfDayEmployee) {
+                employees.add((HalfDayEmployee) departmentEmployees[i]);
+            }
+        }
+        return employees;
+    }
+    public ArrayList<FullDayEmployee> getTravellingEmployeesNow() {
         return null;
     }
-    public ArrayList<InterfaceFullDayEmployee> getTravellingEmployeesNow() {
-        return null;
-    }
-    public ArrayList<InterfaceFullDayEmployee> getTravellingEmployeesByDate() {
+    public ArrayList<FullDayEmployee> getTravellingEmployeesByDate() {
         return null;
     }
 }

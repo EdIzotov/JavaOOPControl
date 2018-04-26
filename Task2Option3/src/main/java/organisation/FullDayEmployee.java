@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import static java.lang.Math.toIntExact;
 
-public class FullDayEmployee extends Employee implements InterfaceFullDayEmployee {
+public class FullDayEmployee extends Employee implements InterfaceBusinessTraveller {
     private ArrayList<BusinessTravel> businessTravelsArray;
 
     public FullDayEmployee(String firstName, String lastName) {

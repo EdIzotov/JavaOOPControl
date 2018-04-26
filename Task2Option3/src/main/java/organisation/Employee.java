@@ -36,14 +36,22 @@ public abstract class Employee implements InterfaceEmployee {
     public String getEmployeeFirstName() {
         return firstName;
     }
-    public void setEmployeeFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEmployeeFirstName(String firstName) throws IllegalArgumentException {
+        if (firstName == null) {
+            throw new IllegalArgumentException("Incorrect value is not allowed");
+        } else {
+            this.firstName = firstName;
+        }
     }
     public String getEmployeeLastName() {
         return lastName;
     }
-    public void setEmployeeLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEmployeeLastName(String lastName) throws IllegalArgumentException {
+        if (lastName == null) {
+            throw new IllegalArgumentException("Incorrect value is not allowed");
+        } else {
+            this.lastName = lastName;
+        }
     }
     public JobTitles getEmployeePosition() {
         return position;

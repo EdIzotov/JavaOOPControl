@@ -18,6 +18,6 @@ interface InterfaceDepartment {
     Employee[] getAllDepartmentEmployeesSortedByNameDes();
     ArrayList<FullDayEmployee> getFullDayEmployees();
     ArrayList<HalfDayEmployee> getHalfDayEmployees();
-    ArrayList<InterfaceFullDayEmployee> getTravellingEmployeesNow();
-    ArrayList<InterfaceFullDayEmployee> getTravellingEmployeesByDate();
+    ArrayList<FullDayEmployee> getTravellingEmployeesNow();
+    ArrayList<FullDayEmployee> getTravellingEmployeesByDate();
 }
