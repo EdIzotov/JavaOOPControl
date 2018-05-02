@@ -15,10 +15,9 @@ public class FullDayEmployeeBusinessTravelCRD {
     private Date hireDateNow;
     private Date hireDateBefore;
     private Date hireDateAfter;
-    private Date hireDateNowAround;
-    private Date hireDateBeforeAround;
-    private Date hireDateAfterAround;
+    private Date hireDateAfterPlus7Days;
     private BusinessTravel businessTravelBefore;
+    private BusinessTravel businessTravelAfter;
 
     @BeforeClass
     public void beforeMethod() {
@@ -28,35 +27,33 @@ public class FullDayEmployeeBusinessTravelCRD {
         salary = 45000;
         Calendar myCalendar = Calendar.getInstance();
         hireDateNow = myCalendar.getTime();
-        Calendar myCalendarAround = Calendar.getInstance();
-        myCalendarAround.setTimeInMillis(hireDateNow.getTime());
-        myCalendarAround.set(Calendar.MILLISECOND, 0);
-        myCalendarAround.set(Calendar.SECOND, 0);
-        myCalendarAround.set(Calendar.MINUTE, 0);
-        myCalendarAround.set(Calendar.HOUR, 0);
-        hireDateNowAround = myCalendarAround.getTime();
         myCalendar.add(Calendar.DATE, -7);
-        myCalendarAround.add(Calendar.DATE, -7);
         hireDateBefore = myCalendar.getTime();
-        hireDateBeforeAround = myCalendarAround.getTime();
         myCalendar.add(Calendar.DATE, 14);
-        myCalendarAround.add(Calendar.DATE, 14);
         hireDateAfter = myCalendar.getTime();
-        hireDateAfterAround = myCalendarAround.getTime();
+        myCalendar.add(Calendar.DATE, 7);
+        hireDateAfterPlus7Days = myCalendar.getTime();
         businessTravelBefore = new BusinessTravel(hireDateBefore, hireDateNow, 1500, 3000, 100);
+        businessTravelAfter = new BusinessTravel(hireDateAfter, hireDateAfterPlus7Days, 1500, 3000, 100);
     }
 
     @Test
-    public void testGetAddEmployeeBusinessTravel() {
+    public void testGetAddEmployeeBusinessTravelBefore() {
         FullDayEmployee myEmployee = new FullDayEmployee(firstName, lastName, position, salary);
-        System.out.println(hireDateNow);
-        System.out.println(hireDateNowAround);
         assertNull(myEmployee.getBusinessTravel(hireDateNow));
         assertNull(myEmployee.getBusinessTravel(hireDateBefore));
         myEmployee.addBusinessTravel(businessTravelBefore);
         assertNotNull(myEmployee.getBusinessTravel(hireDateBefore));
-        assertNotNull(myEmployee.getBusinessTravel(hireDateBeforeAround));
+        assertNotNull(myEmployee.getBusinessTravel(hireDateNow));
+        assertNull(myEmployee.getBusinessTravel(hireDateAfter));
+    }
+    @Test
+    public void testGetAddEmployeeBusinessTravelAfter() {
+        FullDayEmployee myEmployee = new FullDayEmployee(firstName, lastName, position, salary);
         assertNull(myEmployee.getBusinessTravel(hireDateNow));
-        assertNull(myEmployee.getBusinessTravel(hireDateNowAround));
+        assertNull(myEmployee.getBusinessTravel(hireDateAfter));
+        myEmployee.addBusinessTravel(businessTravelAfter);
+        assertNotNull(myEmployee.getBusinessTravel(hireDateAfter));
+        assertNull(myEmployee.getBusinessTravel(hireDateNow));
     }
 }
