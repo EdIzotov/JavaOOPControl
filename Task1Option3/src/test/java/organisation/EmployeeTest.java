@@ -31,6 +31,7 @@ public class EmployeeTest {
         assertEquals(lastName, myEmployee.getEmployeeLastName());
         assertEquals(position, myEmployee.getEmployeePosition());
         assertEquals(salary, myEmployee.getEmployeeSalary());
+        assertEquals(1, 2);
     }
     @Test
     public void testSetEmployeeFirstName() {
