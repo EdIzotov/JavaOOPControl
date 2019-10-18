@@ -18,7 +18,7 @@ public class EmployeeTest {
 
     @Test
     public void testFake() {
-        assertEquals(1, 1);
+        assertEquals(1, 2);
     }
     @Test
     public void testConstructorDefault() {
