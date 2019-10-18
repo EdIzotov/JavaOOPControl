@@ -17,6 +17,10 @@ public class EmployeeTest {
     private int defaultSalary = InterfaceEmployee.DEFAULT_SALARY;
 
     @Test
+    public void testFake() {
+        assertEquals(1, 1);
+    }
+    @Test
     public void testConstructorDefault() {
         Employee myEmployee = new Employee(firstName, lastName);
         assertEquals(firstName, myEmployee.getEmployeeFirstName());
